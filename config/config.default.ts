@@ -52,8 +52,8 @@ export default (appInfo: EggAppInfo) => {
 
   // 微信配置
   config.wechat = {
-    appid: 'wxa9475bcd73043e65',
-    secret: 'c948e6fbc75b2486e5f7b78032503355',
+    appid: 'your wechat mp appid',
+    secret: 'your wechat mp app secret',
     mch_id: '',
     partner_key: '',
     notify_url: '',
@@ -80,7 +80,7 @@ export default (appInfo: EggAppInfo) => {
       /\/api\//,
     ],
     tokenHeader: 'X-VStore-Token',
-    secret: 'S3LDLKdf2KDS3s23ssdd@#@@d%gf',
+    secret: 'your secret',
   };
 
   config.sequelize = {
@@ -103,7 +103,7 @@ export default (appInfo: EggAppInfo) => {
       port: 6379,
       host: '127.0.0.1',
       password: '',
-      keyPrefix: 'member:',
+      keyPrefix: 'vstore:',
       db: 0,
     }
   };
