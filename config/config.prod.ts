@@ -4,11 +4,11 @@ export default () => {
   const config: DefaultConfig = {};
   config.sequelize = {
     dialect: 'mysql',
-    database: 'piandd',
-    host: 'rm-uf6a5e9knb2920pd9ao.mysql.rds.aliyuncs.com',
+    database: 'vstore',
+    host: 'localhost',
     port: 3306,
-    username: 'piandd',
-    password: '20wGbJv1R6eYyCI3',
+    username: 'vstore',
+    password: 'yourpassword',
   };
   return config;
 };
