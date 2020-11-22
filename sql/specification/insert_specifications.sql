@@ -1,1 +1,0 @@
-INSERT INTO `specifications` VALUES (1,'颜色',1),(2,'规格',2);
