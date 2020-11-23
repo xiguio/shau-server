@@ -23,6 +23,9 @@ export default (app: Application) => {
   // 会员等级列表
   router.get(apiPrefix + '/vip/list', controller.vip.list);
 
+  // 微信登录
+  router.post(apiPrefix + '/auth/wechatMPLogin', controller.auth.wechatMPLogin);
+
   // 系统设置
   router.get(apiPrefix + '/system/index', controller.system.index);
 };

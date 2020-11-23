@@ -119,7 +119,7 @@ export default (app: Application) => {
     score: {
       type: INTEGER(11).UNSIGNED,
       allowNull: false,
-      defaultValue: 0,
+      defaultValue: 1,
       comment: '积分余额',
     },
   }, {

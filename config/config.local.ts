@@ -15,8 +15,8 @@ export default () => {
 
   // 微信配置
   config.wechat = {
-    appid: 'wx8bdf3c5dbde7654c',
-    secret: '76f03a093732839bdbb95794e1896084',
+    appid: '',
+    secret: '',
     mch_id: '',
     partner_key: '',
     notify_url: '',
