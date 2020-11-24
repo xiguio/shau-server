@@ -7,6 +7,7 @@
  */
 
 import { Controller } from 'egg';
+import { Op } from 'sequelize';
 import { StatusError } from '../entity/status_error';
 
 export default class ResourceCtrl extends Controller {
@@ -19,16 +20,29 @@ export default class ResourceCtrl extends Controller {
     const rules = {
       page: { type: 'numberString', field: 'page', required: false },
       size: { type: 'numberString', field: 'size', required: false },
-      category: { type: 'numberString', field: 'category', required: false}
+      category: { type: 'numberString', field: 'category', required: false},
+      keywords: { type: 'string', field: 'category', required: false, allowEmpty: true }
     };
-    let { page = 1, size = 10, category } = helper.validateParams(
+    let { page = 1, size = 10, category, keywords = '' } = helper.validateParams(
       rules,
       request.query,
       this.ctx,
     );
     page = +page;
     size = +size;
-    const filter = category && category != 0 ? { categoryId: category } : {};
+    const op = {
+      [Op.or]: [
+        {title: {[Op.like]: `%${keywords}%`}},
+        {cname: {[Op.like]: `%${keywords}%`}},
+        {ename: {[Op.like]: `%${keywords}%`}},
+        {producingArea: {[Op.like]: `%${keywords}%`}},
+        {director: {[Op.like]: `%${keywords}%`}},
+        {palywright: {[Op.like]: `%${keywords}%`}},
+        {mainRole: {[Op.like]: `%${keywords}%`}},
+        {description: {[Op.like]: `%${keywords}%`}}
+      ],
+    };
+    const filter = category && category != 0 ? { categoryId: category, ...op } : { ...op };
     const { count, rows: list } = await model.Resource.findAndCountAll({
       where: filter,
       limit: size,
