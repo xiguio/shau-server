@@ -7,6 +7,7 @@ export default (app: Application) => {
   const needLogin = app.role.can('login');
 
   router.get('/', controller.home.index);
+  router.get(apiPrefix + '/home/list', controller.home.list);
 
   // 网盘资源
   router.get(apiPrefix + '/resource/list', controller.resource.list);
