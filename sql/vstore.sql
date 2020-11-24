@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 21/11/2020 18:29:36
+ Date: 24/11/2020 17:12:06
 */
 
 SET NAMES utf8mb4;
@@ -112,7 +112,7 @@ CREATE TABLE `systems` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL DEFAULT '',
   `about` text NOT NULL,
-  `isConcise` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `wechatMPVersion` int(10) unsigned NOT NULL DEFAULT '100',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
@@ -120,7 +120,7 @@ CREATE TABLE `systems` (
 -- Records of systems
 -- ----------------------------
 BEGIN;
-INSERT INTO `systems` VALUES (1, '影视多', '电影电视剧网盘资源', 1);
+INSERT INTO `systems` VALUES (1, '影视多', '电影电视剧网盘资源', 100);
 COMMIT;
 
 -- ----------------------------
@@ -141,7 +141,7 @@ CREATE TABLE `users` (
   `weixinOpenid` varchar(50) DEFAULT '',
   `weixinUnionid` varchar(50) DEFAULT '',
   `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
-  `score` int(11) unsigned NOT NULL DEFAULT '0',
+  `score` int(11) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `mobile` (`mobile`),
   UNIQUE KEY `mobile_2` (`mobile`),
@@ -162,8 +162,39 @@ CREATE TABLE `users` (
   UNIQUE KEY `mobile_17` (`mobile`),
   UNIQUE KEY `mobile_18` (`mobile`),
   UNIQUE KEY `mobile_19` (`mobile`),
-  UNIQUE KEY `mobile_20` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `mobile_20` (`mobile`),
+  UNIQUE KEY `mobile_21` (`mobile`),
+  UNIQUE KEY `mobile_22` (`mobile`),
+  UNIQUE KEY `mobile_23` (`mobile`),
+  UNIQUE KEY `mobile_24` (`mobile`),
+  UNIQUE KEY `mobile_25` (`mobile`),
+  UNIQUE KEY `mobile_26` (`mobile`),
+  UNIQUE KEY `mobile_27` (`mobile`),
+  UNIQUE KEY `mobile_28` (`mobile`),
+  UNIQUE KEY `mobile_29` (`mobile`),
+  UNIQUE KEY `mobile_30` (`mobile`),
+  UNIQUE KEY `mobile_31` (`mobile`),
+  UNIQUE KEY `mobile_32` (`mobile`),
+  UNIQUE KEY `mobile_33` (`mobile`),
+  UNIQUE KEY `mobile_34` (`mobile`),
+  UNIQUE KEY `mobile_35` (`mobile`),
+  UNIQUE KEY `mobile_36` (`mobile`),
+  UNIQUE KEY `mobile_37` (`mobile`),
+  UNIQUE KEY `mobile_38` (`mobile`),
+  UNIQUE KEY `mobile_39` (`mobile`),
+  UNIQUE KEY `mobile_40` (`mobile`),
+  UNIQUE KEY `mobile_41` (`mobile`),
+  UNIQUE KEY `mobile_42` (`mobile`),
+  UNIQUE KEY `mobile_43` (`mobile`),
+  UNIQUE KEY `mobile_44` (`mobile`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+BEGIN;
+INSERT INTO `users` VALUES (1, 1, '0', '1606103586186', '1606199306827', '', 'yarn🤡', '', '', 'https://thirdwx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLDzbUqiahRwfcznlYqtRaBdgC7TmqibkUm6icrUJA34geWGl68yxz16ichMhIrO4rdOyxEnun8kcXWVBw/132', 'oZLnK5drnb8Fw0P3ngG_cnrwms1Q', '', 0.00, 0);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for vips
@@ -186,10 +217,10 @@ CREATE TABLE `vips` (
 -- Records of vips
 -- ----------------------------
 BEGIN;
-INSERT INTO `vips` VALUES (10000, '初级', 0, 1, 0, 0, '初级用户', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 0);
-INSERT INTO `vips` VALUES (10001, '银星级', 88, 2, 0, 0, '银星级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
-INSERT INTO `vips` VALUES (10002, '玉星级', 264, 4, 0, 0, '玉星级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
-INSERT INTO `vips` VALUES (10003, '金星级', 580, 8, 0, 0, '玉星级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
+INSERT INTO `vips` VALUES (10000, '青铜级', 0, 1, 0, 0, '青铜级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 0);
+INSERT INTO `vips` VALUES (10001, '白银级', 88, 2, 0, 0, '白银级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
+INSERT INTO `vips` VALUES (10002, '黄金级', 264, 4, 0, 0, '黄金级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
+INSERT INTO `vips` VALUES (10003, '钻石级', 580, 8, 0, 0, '钻石级', 'https://img.xigu.pro/FsNJD14EdK2OGEBeE2e2O01eiyVj', 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
