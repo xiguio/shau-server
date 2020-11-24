@@ -6,7 +6,7 @@
  * 系统设置表
  */
 import { Application } from 'egg';
-import Sequelize, { MEDIUMINT, STRING, TINYINT, Instance } from 'sequelize';
+import Sequelize, { MEDIUMINT, STRING, TINYINT, INTEGER, Instance } from 'sequelize';
 
 interface ISystemAttr {
   id?: number;
@@ -47,6 +47,13 @@ export default (app: Application) => {
       allowNull: false,
       defaultValue: 0,
       comment: '是否是简洁模式',
+    },
+
+    wechatMPVersion: {
+      type: INTEGER(10).UNSIGNED,
+      allowNull: false,
+      defaultValue: 100,
+      comment: '微信小程序版本号',
     },
   }, {
     timestamps: false,
