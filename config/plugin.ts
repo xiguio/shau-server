@@ -23,6 +23,10 @@ const plugin: EggPlugin = {
   userrole: {
     package: 'egg-userrole',
   },
+  
+  security: {
+    enable: false,
+  },
 
   redis: {
     enable: true,

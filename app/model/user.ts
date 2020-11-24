@@ -82,7 +82,7 @@ export default (app: Application) => {
     mobile: {
       type: STRING(20),
       allowNull: false,
-      unique: true,
+      // unique: true,
     },
 
     registerIp: {

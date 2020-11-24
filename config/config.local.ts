@@ -13,15 +13,6 @@ export default () => {
     password: 'TAMMENY',
   };
 
-  // 微信配置
-  config.wechat = {
-    appid: '',
-    secret: '',
-    mch_id: '',
-    partner_key: '',
-    notify_url: '',
-  };
-
   config.cors = {
     origin: 'http://localhost:7001',
     // 允许跨域的时候，request携带cookie
