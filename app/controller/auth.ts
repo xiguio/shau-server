@@ -53,7 +53,7 @@ export default class AuthCtrl extends Controller {
     };
   }
 
-  public async loginByWeChat() {
+  public async wechatMPLogin() {
     const { helper, request, response, logger, app: { httpclient, config }, service, model } = this.ctx;
     const { code, userInfo: fullUserInfo } = helper.validateParams({
       code: { type: 'string' },
@@ -123,7 +123,7 @@ export default class AuthCtrl extends Controller {
     // 根据openid查找用户是否已经注册
     let user = await model.User.findOne({
       where: { weixinOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday'],
+      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score'],
       raw: true,
     });
     const now = Date.now();

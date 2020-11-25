@@ -6,13 +6,13 @@
  * 系统设置表
  */
 import { Application } from 'egg';
-import Sequelize, { MEDIUMINT, STRING, TINYINT, Instance } from 'sequelize';
+import Sequelize, { MEDIUMINT, STRING, INTEGER, Instance } from 'sequelize';
 
 interface ISystemAttr {
   id?: number;
   name: string;
   about: string;
-  isConcise: number;
+  wechatMPVersion: number;
 }
 
 interface ISystemInst extends Instance<ISystemAttr>, ISystemAttr {}
@@ -42,11 +42,11 @@ export default (app: Application) => {
       defaultValue: '',
     },
 
-    isConcise: {
-      type: TINYINT(1).UNSIGNED,
+    wechatMPVersion: {
+      type: INTEGER(10).UNSIGNED,
       allowNull: false,
-      defaultValue: 0,
-      comment: '是否是简洁模式',
+      defaultValue: 100,
+      comment: '微信小程序版本号',
     },
   }, {
     timestamps: false,

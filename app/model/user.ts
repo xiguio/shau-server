@@ -82,7 +82,7 @@ export default (app: Application) => {
     mobile: {
       type: STRING(20),
       allowNull: false,
-      unique: true,
+      // unique: true,
     },
 
     registerIp: {
@@ -119,7 +119,7 @@ export default (app: Application) => {
     score: {
       type: INTEGER(11).UNSIGNED,
       allowNull: false,
-      defaultValue: 0,
+      defaultValue: 1,
       comment: '积分余额',
     },
   }, {
