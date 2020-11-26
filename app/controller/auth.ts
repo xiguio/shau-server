@@ -16,9 +16,10 @@ export default class AuthCtrl extends Controller {
     const { helper, request, response, app: { config }, model, service } = this.ctx;
     const params = {
       mobile: { type: 'numberString', field: 'mobile', required: true },
+      inviter: { type: 'string', field: 'inviter', required: false, allowEmpty: true },
       code: { type: 'numberString', field: 'code', required: true },
     };
-    const { mobile, code } = helper.validateParams(
+    const { mobile, inviter, code } = helper.validateParams(
       params,
       request.body,
       this.ctx,
@@ -40,6 +41,8 @@ export default class AuthCtrl extends Controller {
         mobile: mobile,
         amount: 0,
         score: 0,
+        inviter,
+        inviterCode: helper.randomWord(false, 9, 9).toUpperCase(),
       });
     }
     const sessionData = {
@@ -55,14 +58,16 @@ export default class AuthCtrl extends Controller {
 
   public async wechatMPLogin() {
     const { helper, request, response, logger, app: { httpclient, config }, service, model } = this.ctx;
-    const { code, userInfo: fullUserInfo } = helper.validateParams({
+    const { code, inviter, userInfo: fullUserInfo } = helper.validateParams({
       code: { type: 'string' },
+      inviter: { type: 'string', field: 'inviter', required: false, allowEmpty: true },
       userInfo: { type: 'object' },
     }, request.body, this.ctx);
     const userInfo = fullUserInfo.userInfo;
     const clientIp = ''; // 暂时不记录 ip
 
     logger.info('code: ' + code);
+    logger.info('inviter: ' + inviter);
     logger.info('fullUserInfo: ');
     logger.info(fullUserInfo);
 
@@ -123,7 +128,7 @@ export default class AuthCtrl extends Controller {
     // 根据openid查找用户是否已经注册
     let user = await model.User.findOne({
       where: { weixinOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score'],
+      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
       raw: true,
     });
     const now = Date.now();
@@ -142,6 +147,8 @@ export default class AuthCtrl extends Controller {
         nickname: userInfo.nickName,
         amount: 0,
         score: 0,
+        inviter,
+        inviterCode: helper.randomWord(false, 9, 9).toUpperCase(),
       });
     }
 
