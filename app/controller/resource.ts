@@ -21,9 +21,9 @@ export default class ResourceCtrl extends Controller {
       page: { type: 'numberString', field: 'page', required: false },
       size: { type: 'numberString', field: 'size', required: false },
       category: { type: 'numberString', field: 'category', required: false},
-      keywords: { type: 'string', field: 'category', required: false, allowEmpty: true }
+      keywords: { type: 'string', field: 'keywords', required: false, allowEmpty: true }
     };
-    let { page = 1, size = 10, category, keywords = '' } = helper.validateParams(
+    let { page = 1, size = 12, category, keywords = '' } = helper.validateParams(
       rules,
       request.query,
       this.ctx,

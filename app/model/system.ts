@@ -11,6 +11,7 @@ import Sequelize, { MEDIUMINT, STRING, INTEGER, Instance } from 'sequelize';
 interface ISystemAttr {
   id?: number;
   name: string;
+  shortDescription: string;
   about: string;
   wechatMPVersion: number;
 }
@@ -34,6 +35,12 @@ export default (app: Application) => {
       type: STRING(60),
       allowNull: false,
       defaultValue: '',
+    },
+
+    shortDescription: {
+      type: STRING(512),
+      defaultValue: '',
+      comment: '短语介绍',
     },
 
     about: {
