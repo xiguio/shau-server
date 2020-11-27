@@ -38,6 +38,12 @@ export interface IBizConfig {
     // 微信异步通知，例：https://www.nideshop.com/api/pay/notify
     notify_url: string;
   };
+  // qq 设置
+  qq: {
+    appid: string;
+    // 小程序密钥
+    secret: string;
+  };
 }
 
 export default (appInfo: EggAppInfo) => {
@@ -57,6 +63,12 @@ export default (appInfo: EggAppInfo) => {
     mch_id: '',
     partner_key: '',
     notify_url: '',
+  };
+
+  // QQ小程序配置
+  config.qq = {
+    appid: 'your qq mp appid',
+    secret: 'your qq mp app secret',
   };
 
   // add your config here

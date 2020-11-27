@@ -62,7 +62,8 @@ export default class UserCtrl extends Controller {
       avatar,
       userLevelId,
       weixinOpenid,
-      weixinUnionid,
+      qqOpenid,
+      unionid,
     } = helper.validateParams(rules, request.body, this.ctx);
     const params = {
       gender,
@@ -72,7 +73,8 @@ export default class UserCtrl extends Controller {
       avatar,
       userLevelId,
       weixinOpenid,
-      weixinUnionid,
+      qqOpenid,
+      unionid,
     };
     const [affectedCount] = await model.User.update(
       helper.removeAttribute(params),
