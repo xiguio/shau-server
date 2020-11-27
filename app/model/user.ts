@@ -23,6 +23,8 @@ interface IUserAttr {
   weixinUnionid?: string;
   amount: number;
   score: number;
+  inviter?: string;
+  inviterCode: string;
 }
 
 interface IUserInst extends Instance<IUserAttr>, IUserAttr {
@@ -81,7 +83,8 @@ export default (app: Application) => {
 
     mobile: {
       type: STRING(20),
-      allowNull: false,
+      defaultValue: '',
+      // allowNull: false,
       // unique: true,
     },
 
@@ -121,6 +124,18 @@ export default (app: Application) => {
       allowNull: false,
       defaultValue: 1,
       comment: '积分余额',
+    },
+
+    inviter: {
+      type: STRING(50),
+      defaultValue: '',
+      comment: '邀请人的邀请码',
+    },
+
+    inviterCode: {
+      type: STRING(50),
+      allowNull: false,
+      comment: '邀请码',
     },
   }, {
     timestamps: false,

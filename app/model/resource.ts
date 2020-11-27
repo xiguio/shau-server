@@ -6,16 +6,18 @@
  * 网盘资源表
  */
 import { Application } from 'egg';
-import Sequelize, { MEDIUMINT, STRING, TEXT, TINYINT, Instance, INTEGER } from 'sequelize';
+import Sequelize, { MEDIUMINT, STRING, TEXT, TINYINT, Instance, INTEGER, DECIMAL } from 'sequelize';
 
 interface IResourceAttr {
   id?: number;
   categoryId: number;
+  subCategoryId: string;
   title: string;
   thumbnail: string;
   cname: string;
   ename: string;
   years: number;
+  language: string;
   producingArea: string;
   releaseDate: string;
   duration: string;
@@ -23,6 +25,8 @@ interface IResourceAttr {
   palywright: string;
   mainRole: string;
   description: string;
+  imdbRate: number,
+  doubanRate: number,
   deleted: number;
   createTime: string;
   downloadUrl: string;
@@ -52,6 +56,12 @@ export default (app: Application) => {
       comment: '所属分类id',
     },
 
+    subCategoryId: {
+      type: STRING(128),
+      defaultValue: '',
+      comment: '所属子分类id，多个以带前后空格的 / 隔开',
+    },
+
     title: {
       type: STRING(128),
       allowNull: false,
@@ -67,13 +77,13 @@ export default (app: Application) => {
     },
 
     cname: {
-      type: STRING(128),
+      type: STRING(1024),
       defaultValue: '',
       comment: '译名',
     },
 
     ename: {
-      type: STRING(128),
+      type: STRING(1024),
       defaultValue: '',
       comment: '片名',
     },
@@ -84,6 +94,12 @@ export default (app: Application) => {
       comment: '年代',
     },
 
+    language: {
+      type: STRING(128),
+      defaultValue: '',
+      comment: '语言',
+    },
+
     producingArea: {
       type: STRING(64),
       defaultValue: '',
@@ -91,19 +107,19 @@ export default (app: Application) => {
     },
 
     releaseDate: {
-      type: STRING(64),
+      type: STRING(512),
       defaultValue: '',
       comment: '上映日期',
     },
 
     duration: {
-      type: STRING(64),
+      type: STRING(512),
       defaultValue: '',
       comment: '片长',
     },
 
     director: {
-      type: STRING(128),
+      type: STRING(512),
       defaultValue: '',
       comment: '导演',
     },
@@ -115,7 +131,7 @@ export default (app: Application) => {
     },
 
     mainRole: {
-      type: STRING(255),
+      type: STRING(1024),
       defaultValue: '',
       comment: '主演',
     },
@@ -124,6 +140,18 @@ export default (app: Application) => {
       type: TEXT(),
       defaultValue: '',
       comment: '简介',
+    },
+
+    imdbRate: {
+      type: DECIMAL(10, 1).UNSIGNED,
+      defaultValue: 0,
+      comment: 'imdb评分',
+    },
+
+    doubanRate: {
+      type: DECIMAL(10, 1).UNSIGNED,
+      defaultValue: 0,
+      comment: '豆瓣评分',
     },
 
     deleted: {
