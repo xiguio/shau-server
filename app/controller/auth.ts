@@ -128,7 +128,7 @@ export default class AuthCtrl extends Controller {
     // 根据openid查找用户是否已经注册
     let user = await model.User.findOne({
       where: { weixinOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
+      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
       raw: true,
     });
     const now = Date.now();
@@ -214,7 +214,7 @@ export default class AuthCtrl extends Controller {
     // 根据openid查找用户是否已经注册
     let user = await model.User.findOne({
       where: { qqOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
+      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
       raw: true,
     });
     const now = Date.now();

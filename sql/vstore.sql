@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 27/11/2020 16:22:05
+ Date: 02/12/2020 17:30:46
 */
 
 SET NAMES utf8mb4;
@@ -94,7 +94,32 @@ CREATE TABLE `resources` (
   `doubanRate` decimal(10,1) unsigned DEFAULT '0.0',
   `language` varchar(128) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8146 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10623 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for signs
+-- ----------------------------
+DROP TABLE IF EXISTS `signs`;
+CREATE TABLE `signs` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(90) NOT NULL DEFAULT '',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0',
+  `score` int(11) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of signs
+-- ----------------------------
+BEGIN;
+INSERT INTO `signs` VALUES (1, '1天', 1, 1);
+INSERT INTO `signs` VALUES (2, '2天', 2, 2);
+INSERT INTO `signs` VALUES (3, '3天', 3, 4);
+INSERT INTO `signs` VALUES (4, '4天', 4, 8);
+INSERT INTO `signs` VALUES (5, '5天', 5, 16);
+INSERT INTO `signs` VALUES (6, '6天', 6, 32);
+INSERT INTO `signs` VALUES (7, '7天', 7, 88);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for systems
@@ -113,7 +138,7 @@ CREATE TABLE `systems` (
 -- Records of systems
 -- ----------------------------
 BEGIN;
-INSERT INTO `systems` VALUES (1, '影视多', '电影电视剧网盘资源', 100, '电影电视剧网盘资源');
+INSERT INTO `systems` VALUES (1, '影视多', '电影电视剧网盘资源', 106, '电影电视剧网盘资源');
 COMMIT;
 
 -- ----------------------------
@@ -139,6 +164,8 @@ CREATE TABLE `users` (
   `registerFrom` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `unionid` varchar(50) DEFAULT '',
   `qqOpenid` varchar(50) DEFAULT '',
+  `signAt` varchar(50) DEFAULT '',
+  `signCount` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10006 DEFAULT CHARSET=utf8mb4;
 
@@ -146,7 +173,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES (10000, 1, '0', '1606383585729', '1606463880504', '', 'yarn🤡', '', '', 'https://thirdwx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLDzbUqiahRwfcznlYqtRaBdgC7TmqibkUm6icrUJA34geWGl68yxz16ichMhIrO4rdOyxEnun8kcXWVBw/132', 'oZLnK5drnb8Fw0P3ngG_cnrwms1Q', 0.00, 0, 'EAYPVGKHM', '', 1, '', '');
+INSERT INTO `users` VALUES (10000, 1, '0', '1606383585729', '1606894249870', '', 'yarn🤡', '', '', 'https://thirdwx.qlogo.cn/mmopen/vi_32/ajNVdqHZLLDzbUqiahRwfcznlYqtRaBdgC7TmqibkUm6icrUJA34geWGl68yxz16ichMhIrO4rdOyxEnun8kcXWVBw/132', 'oZLnK5drnb8Fw0P3ngG_cnrwms1Q', 0.00, 1, 'EAYPVGKHM', '', 1, '', '', '1606899971989', 1);
 COMMIT;
 
 -- ----------------------------

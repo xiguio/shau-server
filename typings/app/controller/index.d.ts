@@ -6,6 +6,7 @@ import ExportAuth from '../../../app/controller/auth';
 import ExportCategory from '../../../app/controller/category';
 import ExportHome from '../../../app/controller/home';
 import ExportResource from '../../../app/controller/resource';
+import ExportSign from '../../../app/controller/sign';
 import ExportSystem from '../../../app/controller/system';
 import ExportUser from '../../../app/controller/user';
 import ExportVip from '../../../app/controller/vip';
@@ -16,6 +17,7 @@ declare module 'egg' {
     category: ExportCategory;
     home: ExportHome;
     resource: ExportResource;
+    sign: ExportSign;
     system: ExportSystem;
     user: ExportUser;
     vip: ExportVip;

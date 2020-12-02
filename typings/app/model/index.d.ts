@@ -4,6 +4,7 @@
 import 'egg';
 import ExportCategory from '../../../app/model/category';
 import ExportResource from '../../../app/model/resource';
+import ExportSign from '../../../app/model/sign';
 import ExportSystem from '../../../app/model/system';
 import ExportUser from '../../../app/model/user';
 import ExportVip from '../../../app/model/vip';
@@ -12,6 +13,7 @@ declare module 'egg' {
   interface IModel {
     Category: ReturnType<typeof ExportCategory>;
     Resource: ReturnType<typeof ExportResource>;
+    Sign: ReturnType<typeof ExportSign>;
     System: ReturnType<typeof ExportSystem>;
     User: ReturnType<typeof ExportUser>;
     Vip: ReturnType<typeof ExportVip>;

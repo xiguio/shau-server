@@ -95,7 +95,7 @@ export default class UserCtrl extends Controller {
     const { response, model, jwtSession } = this.ctx;
     const data = await model.User.findOne({
       where: { id: jwtSession.userId },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
+      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
     });
     if (data) {
       response.body = data;
