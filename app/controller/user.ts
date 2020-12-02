@@ -92,11 +92,8 @@ export default class UserCtrl extends Controller {
    * @memberof UserCtrl
    */
   public async detail() {
-    const { response, model, jwtSession } = this.ctx;
-    const data = await model.User.findOne({
-      where: { id: jwtSession.userId },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
-    });
+    const { response, service, jwtSession } = this.ctx;
+    const data = await service.user.detail({ id: jwtSession.userId });
     if (data) {
       response.body = data;
     } else {

@@ -126,11 +126,7 @@ export default class AuthCtrl extends Controller {
     }
 
     // 根据openid查找用户是否已经注册
-    let user = await model.User.findOne({
-      where: { weixinOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
-      raw: true,
-    });
+    let user = await service.user.detail({ weixinOpenid: sessionData.openid });
     const now = Date.now();
     if (!user) {
       // 注册
@@ -173,7 +169,7 @@ export default class AuthCtrl extends Controller {
   }
 
   public async qqMPLogin() {
-    const { helper, request, response, logger, app: { httpclient, config }, model } = this.ctx;
+    const { helper, request, response, logger, app: { httpclient, config }, model, service } = this.ctx;
     const { code, inviter, userInfo: fullUserInfo } = helper.validateParams({
       code: { type: 'string' },
       inviter: { type: 'string', field: 'inviter', required: false, allowEmpty: true },
@@ -212,11 +208,7 @@ export default class AuthCtrl extends Controller {
     }
 
     // 根据openid查找用户是否已经注册
-    let user = await model.User.findOne({
-      where: { qqOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
-      raw: true,
-    });
+    let user = await service.user.detail({ qqOpenid: sessionData.openid });
     const now = Date.now();
     if (!user) {
       // 注册

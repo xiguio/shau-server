@@ -18,7 +18,7 @@ export default class SignCtrl extends Controller {
   }
 
   public async do() {
-    const { request, helper, model, response } = this.ctx;
+    const { request, helper, model, service, response } = this.ctx;
     const rules = {
       userId: { type: 'numberString', field: 'userId' },
       signId: { type: 'numberString', field: 'signId' },
@@ -55,11 +55,7 @@ export default class SignCtrl extends Controller {
       { where: { id: userId } },
     );
     if (affectedCount) {
-      response.body = await model.User.findOne({
-        where: { id: userId },
-        attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'signAt', 'signCount', 'inviter', 'inviterCode'],
-        raw: true,
-      });
+      response.body = await service.user.detail({ id: userId });
     } else {
       throw new StatusError('无数据更新', StatusError.ERROR_STATUS.DATA_ERROR);
     }
