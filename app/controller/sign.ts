@@ -11,22 +11,23 @@ import { literal } from 'sequelize';
 import { StatusError } from '../entity/status_error';
 
 export default class SignCtrl extends Controller {
+  
+  // 获取签到时间表
   public async list() {
     const { model, response } = this.ctx;
     const list = await model.Sign.findAll({ raw: true });
     response.body = list || [];
   }
 
+  // 用户签到
   public async do() {
-    const { request, helper, model, service, response } = this.ctx;
+    const { request, helper, model, service, response, jwtSession } = this.ctx;
     const rules = {
-      userId: { type: 'numberString', field: 'userId' },
       signId: { type: 'numberString', field: 'signId' },
       signScore: { type: 'numberString', field: 'signScore' },
       signAt: { type: 'string', field: 'signAt', allowEmpty: true },
     };
     const {
-      userId,
       signId,
       signScore,
       signAt,
@@ -45,17 +46,21 @@ export default class SignCtrl extends Controller {
     if (days < 1) {
       throw new StatusError('今天已签到，明天再来吧', StatusError.ERROR_STATUS.DATA_ERROR);
     }
-    const now = new Date().getTime();
+    // 给用户添加积分，并生成积分流水
+    const { affectedCount: scoreAffectedCount } = await model.Score.add(jwtSession.userId, signScore, '每日签到', '');
+    if (!scoreAffectedCount) {
+      throw new StatusError('更新用户积分失败', StatusError.ERROR_STATUS.DATA_ERROR);
+    }
+    // 更新用户连续签到天数和日期
     const [affectedCount] = await model.User.update(
       {
         signCount: days > 1 ? 1 : literal('signCount+1'),
-        signAt: `${now}`,
-        score: literal(`score+${signScore}`)
+        signAt: `${Date.now()}`,
       },
-      { where: { id: userId } },
+      { where: { id: jwtSession.userId } },
     );
     if (affectedCount) {
-      response.body = await service.user.detail({ id: userId });
+      response.body = await service.user.detail({ id: jwtSession.userId });
     } else {
       throw new StatusError('无数据更新', StatusError.ERROR_STATUS.DATA_ERROR);
     }

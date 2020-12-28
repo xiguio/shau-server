@@ -27,7 +27,7 @@ export default (app: Application) => {
   // 签到时间列表
   router.get(apiPrefix + '/sign/list', controller.sign.list);
   // 签到
-  router.post(apiPrefix + '/sign/do', controller.sign.do);
+  router.post(apiPrefix + '/sign/do', needLogin, controller.sign.do);
 
   // 微信登录
   router.post(apiPrefix + '/auth/wechatMPLogin', controller.auth.wechatMPLogin);
