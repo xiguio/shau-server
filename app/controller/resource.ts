@@ -47,6 +47,7 @@ export default class ResourceCtrl extends Controller {
       where: filter,
       limit: size,
       offset: helper.pageOffset(page, size),
+      order: [['createTime', 'desc']],
       raw: true,
     });
 

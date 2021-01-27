@@ -24,8 +24,15 @@ export default (app: Application) => {
   // 会员等级列表
   router.get(apiPrefix + '/vip/list', controller.vip.list);
 
+  // 签到时间列表
+  router.get(apiPrefix + '/sign/list', controller.sign.list);
+  // 签到
+  router.post(apiPrefix + '/sign/do', needLogin, controller.sign.do);
+
   // 微信登录
   router.post(apiPrefix + '/auth/wechatMPLogin', controller.auth.wechatMPLogin);
+  // QQ登录
+  router.post(apiPrefix + '/auth/qqMPLogin', controller.auth.qqMPLogin);
 
   // 系统设置
   router.get(apiPrefix + '/system/index', controller.system.index);

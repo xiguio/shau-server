@@ -62,7 +62,8 @@ export default class UserCtrl extends Controller {
       avatar,
       userLevelId,
       weixinOpenid,
-      weixinUnionid,
+      qqOpenid,
+      unionid,
     } = helper.validateParams(rules, request.body, this.ctx);
     const params = {
       gender,
@@ -72,7 +73,8 @@ export default class UserCtrl extends Controller {
       avatar,
       userLevelId,
       weixinOpenid,
-      weixinUnionid,
+      qqOpenid,
+      unionid,
     };
     const [affectedCount] = await model.User.update(
       helper.removeAttribute(params),
@@ -90,11 +92,8 @@ export default class UserCtrl extends Controller {
    * @memberof UserCtrl
    */
   public async detail() {
-    const { response, model, jwtSession } = this.ctx;
-    const data = await model.User.findOne({
-      where: { id: jwtSession.userId },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
-    });
+    const { response, service, jwtSession } = this.ctx;
+    const data = await service.user.detail({ id: jwtSession.userId });
     if (data) {
       response.body = data;
     } else {

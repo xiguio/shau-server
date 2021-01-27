@@ -37,6 +37,7 @@ export default class HomeCtrl extends Controller {
     for (let i = 0, length = categoryList.length; i < length; i++) {
       const resourceList = await model.Resource.findAll({
         where: { categoryId: categoryList[i].id},
+        order: [['createTime', 'desc']],
         limit,
         raw: true,
       });

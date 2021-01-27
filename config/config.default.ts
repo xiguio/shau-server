@@ -38,6 +38,12 @@ export interface IBizConfig {
     // 微信异步通知，例：https://www.nideshop.com/api/pay/notify
     notify_url: string;
   };
+  // qq 设置
+  qq: {
+    appid: string;
+    // 小程序密钥
+    secret: string;
+  };
 }
 
 export default (appInfo: EggAppInfo) => {
@@ -48,15 +54,21 @@ export default (appInfo: EggAppInfo) => {
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1606028877345_1508';
+  config.keys = appInfo.name + '_1530154885564_2259';
 
   // 微信配置
   config.wechat = {
-    appid: 'your wechat mp appid',
-    secret: 'your wechat mp app secret',
+    appid: 'wxa9475bcd73043e65',
+    secret: 'c948e6fbc75b2486e5f7b78032503355',
     mch_id: '',
     partner_key: '',
     notify_url: '',
+  };
+  
+  // QQ小程序配置
+  config.qq = {
+    appid: '1111249956',
+    secret: 'lJAjqjkWhIhwVj0A',
   };
 
   // add your config here
@@ -80,7 +92,7 @@ export default (appInfo: EggAppInfo) => {
       /\/api\//,
     ],
     tokenHeader: 'X-VStore-Token',
-    secret: 'your secret',
+    secret: 'S3LDLKdf2KDS3s23ssdd@#@@d%gf',
   };
 
   config.sequelize = {

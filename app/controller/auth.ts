@@ -126,22 +126,101 @@ export default class AuthCtrl extends Controller {
     }
 
     // 根据openid查找用户是否已经注册
-    let user = await model.User.findOne({
-      where: { weixinOpenid: sessionData.openid },
-      attributes: ['id', 'nickname', 'gender', 'avatar', 'birthday', 'amount', 'mobile', 'score', 'inviter', 'inviterCode'],
-      raw: true,
-    });
+    let user = await service.user.detail({ weixinOpenid: sessionData.openid });
     const now = Date.now();
     if (!user) {
       // 注册
       user = await model.User.create({
         registerTime: now,
         registerIp: clientIp,
+        registerFrom: 1,
         lastLoginTime: now,
         lastLoginIp: clientIp,
         mobile: '',
         weixinOpenid: sessionData.openid,
-        weixinUnionid: sessionData.unionid,
+        unionid: sessionData.unionid,
+        avatar: userInfo.avatarUrl || '',
+        gender: userInfo.gender || 1,
+        nickname: userInfo.nickName,
+        amount: 0,
+        score: 0,
+        inviter,
+        inviterCode: helper.randomWord(false, 9, 9).toUpperCase(),
+      });
+    }
+
+    sessionData.userId = user.id;
+
+    // 更新登录信息
+    model.User.update({
+      lastLoginIp: clientIp,
+      lastLoginTime: now,
+    }, {
+      where: { id: user.id },
+    });
+
+    // 创建token
+    const token = jwt.sign(sessionData, config.jwtSession.secret);
+
+    response.body = {
+      token,
+      userInfo: user,
+    };
+  }
+
+  public async qqMPLogin() {
+    const { helper, request, response, logger, app: { httpclient, config }, model, service } = this.ctx;
+    const { code, inviter, userInfo: fullUserInfo } = helper.validateParams({
+      code: { type: 'string' },
+      inviter: { type: 'string', field: 'inviter', required: false, allowEmpty: true },
+      userInfo: { type: 'object' },
+    }, request.body, this.ctx);
+    const userInfo = fullUserInfo.userInfo;
+    const clientIp = ''; // 暂时不记录 ip
+
+    logger.info('code: ' + code);
+    logger.info('inviter: ' + inviter);
+    logger.info('fullUserInfo: ');
+    logger.info(fullUserInfo);
+
+    // 向qq服务器请求登录会话信息
+    const sessionData = await httpclient.request('https://api.q.qq.com/sns/jscode2session', {
+      method: 'GET',
+      data: {
+        grant_type: 'authorization_code',
+        js_code: code,
+        secret: config.qq.secret,
+        appid: config.qq.appid,
+      },
+      dataType: 'json',
+    }).then(res => res.data) as {
+      session_key: string;
+      openid: string;
+      unionid: string;
+      userId?: number;
+    };
+
+    logger.info('sessionData: ');
+    logger.info(sessionData);
+
+    if (!sessionData || !sessionData.openid) {
+      throw new StatusError('登录失败', StatusError.ERROR_STATUS.SERVER_ERROR);
+    }
+
+    // 根据openid查找用户是否已经注册
+    let user = await service.user.detail({ qqOpenid: sessionData.openid });
+    const now = Date.now();
+    if (!user) {
+      // 注册
+      user = await model.User.create({
+        registerTime: now,
+        registerIp: clientIp,
+        registerFrom: 2,
+        lastLoginTime: now,
+        lastLoginIp: clientIp,
+        mobile: '',
+        qqOpenid: sessionData.openid,
+        unionid: sessionData.unionid,
         avatar: userInfo.avatarUrl || '',
         gender: userInfo.gender || 1,
         nickname: userInfo.nickName,

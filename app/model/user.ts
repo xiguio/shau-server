@@ -6,7 +6,7 @@
  * 用户表
  */
 import { Application } from 'egg';
-import Sequelize, { MEDIUMINT, STRING, TINYINT, Instance, INTEGER, DECIMAL } from 'sequelize';
+import Sequelize, { MEDIUMINT, STRING, TINYINT, Instance, INTEGER, DECIMAL, literal } from 'sequelize';
 
 interface IUserAttr {
   id?: number;
@@ -18,11 +18,15 @@ interface IUserAttr {
   nickname: string;
   mobile: string;
   registerIp?: string;
+  registerFrom?: number;
   avatar?: string;
   weixinOpenid?: string;
-  weixinUnionid?: string;
+  qqOpenid?: string;
+  unionid?: string;
   amount: number;
-  score: number;
+  score: number | literal;
+  signAt?: string;
+  signCount?: number | literal;
   inviter?: string;
   inviterCode: string;
 }
@@ -94,6 +98,13 @@ export default (app: Application) => {
       defaultValue: '',
     },
 
+    registerFrom: {
+      type: TINYINT(1).UNSIGNED,
+      allowNull: false,
+      defaultValue: 1,
+      comment: '注册来源1.微信小程序;2.QQ小程序'
+    },
+
     avatar: {
       type: STRING(255),
       allowNull: true,
@@ -106,7 +117,13 @@ export default (app: Application) => {
       defaultValue: '',
     },
 
-    weixinUnionid: {
+    qqOpenid: {
+      type: STRING(50),
+      allowNull: true,
+      defaultValue: '',
+    },
+
+    unionid: {
       type: STRING(50),
       allowNull: true,
       defaultValue: '',
@@ -124,6 +141,20 @@ export default (app: Application) => {
       allowNull: false,
       defaultValue: 1,
       comment: '积分余额',
+    },
+
+    signAt: {
+      type: STRING(50),
+      allowNull: true,
+      defaultValue: '',
+      comment: '上次签到时间',
+    },
+
+    signCount: {
+      type: INTEGER(11).UNSIGNED,
+      allowNull: true,
+      defaultValue: 0,
+      comment: '连续签到天数',
     },
 
     inviter: {
