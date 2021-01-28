@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
- Source Schema         : vstore
+ Source Schema         : shau
 
  Target Server Type    : MySQL
  Target Server Version : 50723
@@ -138,7 +138,7 @@ CREATE TABLE `systems` (
 -- Records of systems
 -- ----------------------------
 BEGIN;
-INSERT INTO `systems` VALUES (1, '影视多', '电影电视剧网盘资源', 106, '电影电视剧网盘资源');
+INSERT INTO `systems` VALUES (1, '鲨鱼CMS', '自带裂变属性的CMS', 106, '自带裂变属性的CMS');
 COMMIT;
 
 -- ----------------------------

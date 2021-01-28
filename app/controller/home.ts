@@ -15,7 +15,7 @@ export default class HomeCtrl extends Controller {
    */
   public async index() {
     const { response } = this.ctx;
-    response.body = '影视多';
+    response.body = '鲨鱼CMS';
   }
 
   /**
