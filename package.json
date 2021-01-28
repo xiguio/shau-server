@@ -1,14 +1,14 @@
 {
-  "name": "vstore",
+  "name": "shau",
   "version": "1.0.0",
-  "description": "vstore power by xigu.io",
+  "description": "shau power by xigu.io",
   "private": true,
   "egg": {
     "typescript": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-vstore",
-    "stop": "egg-scripts stop --title=egg-server-vstore",
+    "start": "egg-scripts start --daemon --title=egg-server-shau",
+    "stop": "egg-scripts stop --title=egg-server-shau",
     "dev": "egg-bin dev -r egg-ts-helper/register",
     "debug": "egg-bin debug -r egg-ts-helper/register",
     "test-local": "egg-bin test -r egg-ts-helper/register",

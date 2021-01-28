@@ -14,7 +14,7 @@ export default () => {
   // 数据库配置
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'vstore',
+    database: 'shau',
     host: 'localhost',
     port: 3306,
     username: 'root',

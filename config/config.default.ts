@@ -91,13 +91,13 @@ export default (appInfo: EggAppInfo) => {
     match: [
       /\/api\//,
     ],
-    tokenHeader: 'X-VStore-Token',
+    tokenHeader: 'X-ShaU-Token',
     secret: 'S3LDLKdf2KDS3s23ssdd@#@@d%gf',
   };
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'vstore',
+    database: 'shau',
     host: 'localhost',
     port: 3306,
     username: 'root',
@@ -115,7 +115,7 @@ export default (appInfo: EggAppInfo) => {
       port: 6379,
       host: '127.0.0.1',
       password: '',
-      keyPrefix: 'vstore:',
+      keyPrefix: 'shau:',
       db: 0,
     }
   };

@@ -4,10 +4,10 @@ export default () => {
   const config: DefaultConfig = {};
   config.sequelize = {
     dialect: 'mysql',
-    database: 'vstore',
+    database: 'shau',
     host: 'localhost',
     port: 3306,
-    username: 'vstore',
+    username: 'shau',
     password: 'yourpassword',
   };
   return config;
