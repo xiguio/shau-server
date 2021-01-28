@@ -58,8 +58,8 @@ export default (appInfo: EggAppInfo) => {
 
   // 微信配置
   config.wechat = {
-    appid: 'wxa9475bcd73043e65',
-    secret: 'c948e6fbc75b2486e5f7b78032503355',
+    appid: 'your wechat mini program appid',
+    secret: 'your wechat mini program appsecret',
     mch_id: '',
     partner_key: '',
     notify_url: '',
@@ -67,8 +67,8 @@ export default (appInfo: EggAppInfo) => {
   
   // QQ小程序配置
   config.qq = {
-    appid: '1111249956',
-    secret: 'lJAjqjkWhIhwVj0A',
+    appid: 'your qq mini program appid',
+    secret: 'your qq mini program appsecret',
   };
 
   // add your config here
